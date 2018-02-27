@@ -53,8 +53,7 @@ module ``11: Parametric polymorphism`` =
 
     [<Test>]
     let ``02 Defining a generic function`` () =
-        let f x y = __
-
+        let f x y = (x, y, y)
         f 4 5 |> should equal (4, 5, 5)
         f "k" 'p' |> should equal ("k", 'p', 'p')
 
@@ -67,17 +66,17 @@ module ``11: Parametric polymorphism`` =
     }
     // we might create this with: { Something=5; Blah=8; Otherwise=9.3; What=77,"hi",0.88 }
 
-    type MyRecord = {
-        Who : FILL_ME_IN // <-- should be generic
-        What : FILL_ME_IN // <-- should be generic, and a different type to Who
+    type MyRecord<'c,'d> = {
+        Who : 'c  // <-- should be generic
+        What : 'd // <-- should be generic, and a different type to Who
         Where : string
     }
 
     [<Test>]
     let ``03 Creating a generic record`` () =
         // You need to edit the definition of MyRecord first!  It's just above this test.
-        let a = __
-        let b = __  
+        let a = {MyRecord.Who = "The Doctor";MyRecord.What = 4.53;MyRecord.Where = "TTFN"}
+        let b = {Who = 'R';What = false;Where = "tiffin"} 
         a.Who |> should equal "The Doctor"
         b.Who |> should equal 'R'
         a.What |> should equal 4.53
@@ -95,21 +94,21 @@ module ``11: Parametric polymorphism`` =
         let a = Secnod (6.55, 7)
         let b = Thrid (fun k -> true, k, 8)
         // how do you write a generic type?
-        a |> should be ofType<FILL_ME_IN>
-        b |> should be ofType<FILL_ME_IN>
+        a |> should be ofType<'b>
+        b |> should be ofType<'b>
 
-    type MyDiscriminatedUnion =
-    | Furoth of FILL_ME_IN
+    type MyDiscriminatedUnion<'a, 'b> =
+    | Furoth of 'a 
     | Fevi
-    | Sxi of FILL_ME_IN
+    | Sxi of 'b
 
     [<Test>]
     let ``05 Creating a generic discriminated union (Part 2).`` () =
         // You need to edit the definition of MyDiscriminatedUnion first!  It's just above this test.
-        let a = __
-        let b = __
-        let c = __
-        let d = __
+        let a = Furoth 7 
+        let b = Sxi "bleh"
+        let c = Furoth 't'
+        let d = Sxi true
         match a with
         | Furoth n -> n |> should equal 7
         | _ -> Assert.Fail ()
