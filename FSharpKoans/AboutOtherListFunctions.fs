@@ -20,7 +20,7 @@ module ``19: Other list functions`` =
     [<Test>]
     let ``01 exists: finding whether any matching item exists`` () =
         let exists (f : 'a -> bool) (xs : 'a list) : bool =
-            __ // Does this: https://msdn.microsoft.com/en-us/library/ee370309.aspx
+            List.exists f xs // Does this: https://msdn.microsoft.com/en-us/library/ee370309.aspx
         exists ((=) 4) [7;6;5;4;5] |> should equal true
         exists (fun x -> String.length x < 4) ["true"; "false"] |> should equal false
         exists (fun _ -> true) [] |> should equal false

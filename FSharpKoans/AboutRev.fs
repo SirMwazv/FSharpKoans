@@ -19,7 +19,7 @@ module ``14: Reversing a list`` =
     // Hint: https://msdn.microsoft.com/en-us/library/ee340277.aspx
     [<Test>]
     let ``02 Reversing a list, the easy way`` () =
-        __ [9;8;7] |> should equal [7;8;9]
-        __ [] |> should equal []
-        __ [0] |> should equal [0]
-        __ [9;8;5;8;45] |> should equal [45;8;5;8;9]
+        List.rev [9;8;7] |> should equal [7;8;9]
+        List.rev [] |> should equal []
+        List.rev [0] |> should equal [0]
+        List.rev [9;8;5;8;45] |> should equal [45;8;5;8;9]

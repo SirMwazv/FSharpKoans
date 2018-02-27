@@ -125,10 +125,10 @@ module ``07: Strings and Conversions`` =
     [<Test>]
     let ``17 You can use the "usual" C# string methods from F#`` () =
         let s = "  Dr Phil, PhD, MD, MC, Medicine Man  "
-        let ``first index of 'P'`` = s.IndexOf('p')
-        let ``last index of 'P'`` = s.LastIndexOf('p')
-        let ``lowercase version`` = s.ToLower
-        let ``without surrounding space`` = s.ToString
+        let ``first index of 'P'`` = s.IndexOf('P')
+        let ``last index of 'P'`` = s.LastIndexOf('P')
+        let ``lowercase version`` = s.ToLower()
+        let ``without surrounding space`` = s.Trim()
         ``first index of 'P'`` |> should equal 5
         ``last index of 'P'`` |> should equal 11
         ``lowercase version`` |> should equal "  dr phil, phd, md, mc, medicine man  "

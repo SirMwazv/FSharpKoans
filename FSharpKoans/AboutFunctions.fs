@@ -235,7 +235,7 @@ module ``08: Putting the Function into Functional Programming`` =
             | true -> "Pink"
             | false -> "Slink"
         let check x =
-            x % 2 <> 0 && x % 3 <> 0 && x % 5 <> 0 && x % 7 <> 0 && x % 11 <> 0
+            (x % 2 <> 0) && (x % 3 <> 0) && (x % 5 <> 0) && (x % 7 <> 0) && (x % 11 <> 0)
         myIf (fun x -> x%2 = 0) |> should equal __
         myIf (fun x -> x<35) |> should equal __
         myIf (fun x -> x+2 = 0) |> should equal __
