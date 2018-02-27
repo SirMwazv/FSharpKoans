@@ -22,9 +22,9 @@ module ``09: Advanced pattern-matching`` =
             | "wut" | "lol" -> "yolo"
             | "sunrise"
             | "sunset" -> "transition"
-            | FILL__ME_IN
-            | FILL__ME_IN
-            | FILL__ME_IN -> "failure"
+            | "Bell's" -> "failure"
+            | "vodka" -> "failure"
+            | "Johnny Walker" -> "failure"
             | _ -> "lolwut"
         f "lol" |> should equal "yolo"
         f "wut" |> should equal "yolo"

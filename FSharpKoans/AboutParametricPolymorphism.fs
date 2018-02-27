@@ -46,14 +46,15 @@ module ``11: Parametric polymorphism`` =
     [<Test>]
     let ``01 id: the simplest built-in generic function`` () =
         // `id` is the identify function: it takes an input ... and gives it back immediately.
-        id 8 |> should equal __
-        id 7.6 |> should equal __
-        id "wut!" |> should equal __
+        id 8 |> should equal 8
+        id 7.6 |> should equal 7.6
+        id "wut!" |> should equal "wut!"
         // id can be surprisingly useful.  Remember it :).
 
     [<Test>]
     let ``02 Defining a generic function`` () =
         let f x y = __
+
         f 4 5 |> should equal (4, 5, 5)
         f "k" 'p' |> should equal ("k", 'p', 'p')
 
