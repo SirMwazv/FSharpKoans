@@ -208,12 +208,12 @@ module ``08: Putting the Function into Functional Programming`` =
         hailstone 5 |> should equal 16
 
     [<Test>]
-    let ``26 Functions have types`` () =
-        let a x y = x + y
+     let ``26 Functions have types`` () =
+        let a x y = x + y // 
         let b a b c d e = sprintf "%d %f %s %c %b" a b c d e
-        a |> should be ofType<int->int->int>
-        b |> should be ofType<int->float->string->char->bool->string>
-        b 14 -8.7 |> should be ofType<int->float->'a>
+        a |> should be ofType<int -> int>
+        b |> should be ofType<int->float->string->char->bool>
+        b 14 -8.7 |> should be ofType<string -> char -> bool>
 
 
     [<Test>]
@@ -235,26 +235,35 @@ module ``08: Putting the Function into Functional Programming`` =
             | true -> "Pink"
             | false -> "Slink"
         let check x =
+<<<<<<< HEAD
+            x % 2 <> 0 && x % 3 <> 0 && x % 5 <> 0 && x % 7 <> 0 && x % 11 <> 0
+        myIf (fun x -> x%2 = 0) |> should equal "Slink"
+        myIf (fun x -> x<35) |> should equal "Pink"
+        myIf (fun x -> x+2 = 0) |> should equal "Slink"
+        myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal "Pink"
+        myIf check |> should equal "Pink"
+=======
             (x % 2 <> 0) && (x % 3 <> 0) && (x % 5 <> 0) && (x % 7 <> 0) && (x % 11 <> 0)
         myIf (fun x -> x%2 = 0) |> should equal __
         myIf (fun x -> x<35) |> should equal __
         myIf (fun x -> x+2 = 0) |> should equal __
         myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal __
         myIf check |> should equal __
+>>>>>>> 88726e5a7a10e81deca1f2f24f6407ef464a136d
 
     [<Test>]
     let ``28 Type annotations for function types`` () =
-        let a (x:FILL_ME_IN) (y:FILL_ME_IN) = x + y
-        let b (x:FILL_ME_IN) (y:FILL_ME_IN) = x + y
+        let a (x: string) (y:string) = x + y
+        let b (x:float) (y:float) = x + y
         a |> should be ofType<string -> string -> string>
         b |> should be ofType<float -> float -> float>
-        a __ __ |> should equal "skipping"
-        b __ __ |> should equal 1.02
+        a "skip" "ping" |> should equal "skipping"
+        b 1.00 0.02 |> should equal 1.02
 
     [<Test>]
     let ``29 We can use a type annotation for a function's output`` () =
-        let k a b : FILL_ME_IN = a * b
-        k __ __ |> should equal 15.0 
+        let k a b : float = a * b
+        k 5.0 3.0 |> should equal 15.0
 
     (*
         Sometimes you want to force type-resolution to occur at a call-site.
@@ -265,10 +274,10 @@ module ``08: Putting the Function into Functional Programming`` =
     // see: https://msdn.microsoft.com/en-us/library/dd548047.aspx
     [<Test>]
     let ``30 The 'inline' keyword forces type-resolution at callsite`` () =
-        let (*REPLACE_THIS_COMMENT_WITH_KEYWORD*) a x y = x + y
+        let inline a x y = x + y
         a 6 7 |> should equal 13 // expected: an int
-        a __ __ |> should equal 1.2 // expected: a float
-        a __ __ |> should equal "beebop" // expected: a string
+        a 1.2 0.0 |> should equal 1.2 // expected: a float
+        a "bee" "bop" |> should equal "beebop" // expected: a string
 
    (*
        Did you know that operators like +, -, =, >, and so on, are actually
@@ -277,9 +286,9 @@ module ``08: Putting the Function into Functional Programming`` =
 
     [<Test>]
     let ``31 Operators are functions in disguise`` () =
-        (+) 5 8 |> should equal __
-        (-) 3 5 |> should equal __
-        (/) 12 4 |> should equal __
-        (=) 93.1 93.12 |> should equal __
-        (<) "hey" "jude" |> should equal __
+        (+) 5 8 |> should equal 13
+        (-) 3 5 |> should equal -2
+        (/) 12 4 |> should equal 3
+        (=) 93.1 93.12 |> should equal false
+        (<) "hey" "jude" |> should equal true
         // ... and other operators: >, <=, >=, <>, %, ...

@@ -9,7 +9,11 @@ module ``15: Applying a map to a list`` =
     [<Test>]
     let ``01 Fixed-function mapping, the hard way (part 1).`` () =
         let map (xs : int list) : int list =
-            __ // write a function which adds 1 to each element
+            let rec innerMap xs newList = 
+               match xs with
+               |[] -> newList
+               |a::restA -> innerMap (restA) (newList@[a+1])
+            innerMap xs [] // write a function which adds 1 to each element
         map [1; 2; 3; 4] |> should equal [2; 3; 4; 5]
         map [9; 8; 7; 6] |> should equal [10; 9; 8; 7]
         map [15; 2; 7] |> should equal [16; 3; 8]

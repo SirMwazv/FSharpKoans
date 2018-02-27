@@ -35,7 +35,13 @@ module ``17: Welcome to the functional fold`` =
     [<Test>]
     let ``01 A fold which sums a list`` () =
         let fold initialState xs =
-            __ // write a function to do what's described above
+             let rec innerFold xs initialState = 
+               match xs with 
+               |[] -> initialState
+               | a::restA -> 
+                          innerFold restA initialState+a
+             innerFold xs initialState
+            // write a function to do what's described above
         fold 0 [1; 2; 3; 4] |> should equal 10
         fold 100 [2;4;6;8] |> should equal 120
 
