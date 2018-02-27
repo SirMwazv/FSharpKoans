@@ -134,7 +134,7 @@ module ``08: Putting the Function into Functional Programming`` =
         // as above, but what do you do when the arguments aren't in the order
         // that you want them to be in?
         let f animal noise = animal + " says " + noise
-        let howl k = __ // <- multiple words on this line.  You MUST use `f`.
+        let howl k = f k "slash/crunch/snap" // <- multiple words on this line.  You MUST use `f`.
         howl "dire wolf" |> should equal "dire wolf says slash/crunch/snap"
         howl "direr wolf" |> should equal "direr wolf says slash/crunch/snap"
 
@@ -143,7 +143,8 @@ module ``08: Putting the Function into Functional Programming`` =
         // Extending a bit more, what do you do when you want to apply a function,
         // but modify the result before you give it back?
         let f animal noise = animal + " says " + noise
-        let cows = __ // <-- multiple words on this line, or you may want to make this a multi-line thing.  You MUST use `f`.
+        let cows = fun moo -> // <-- multiple words on this line, or you may want to make this a multi-line thing.  You MUST use `f`.
+            f "cow" moo + ", de gozaru"
         cows "moo" |> should equal "cow says moo, de gozaru"
         cows "MOOooOO" |> should equal "cow says MOOooOO, de gozaru"
 
@@ -151,16 +152,16 @@ module ``08: Putting the Function into Functional Programming`` =
     let ``20 Aliasing a function`` () =
         let f x = x + 2
         let y = f
-        y 20 |> should equal ___
+        y 20 |> should equal 22
 
     [<Test>]
     let ``21 Getting closure`` () =
-        let calculate initial final = // note the number of inputs.
+        let calculate initial final = // note the number of inputs. // 0:initial 600:final t:250 middle:300
             let middle = (final - initial) / 2
             fun t -> t-middle, t+middle
         // note the number of inputs provided below.  Do you see why I can do this?
-        calculate 10 20 5 |> should equal __
-        calculate 0 600 250 |> should equal __
+        calculate 10 20 5 |> should equal (0,10)
+        calculate 0 600 250 |> should equal (-50,550)
 
     [<Test>]
     let ``22 Using a value defined in an inner scope`` () =
@@ -171,8 +172,8 @@ module ``08: Putting the Function into Functional Programming`` =
                 | 0 -> 10
                 | 1 -> 65
             fun x -> result - x
-        g 5 8 |> should equal __
-        g 8 5 |> should equal __
+        g 5 8 |> should equal 57 //65 -8
+        g 8 5 |> should equal 5 //10 - 5
         // PS. I hope this one brought you some closure.
 
     [<Test>]
@@ -180,8 +181,8 @@ module ``08: Putting the Function into Functional Programming`` =
         let a = 25
         let f () = a + 10
         let a = 99
-        a |> should equal __
-        f () |> should equal __
+        a |> should equal 99
+        f () |> should equal 35
 
     (*
         The `rec` keyword exposes the function identifier for use inside the function.
@@ -195,8 +196,8 @@ module ``08: Putting the Function into Functional Programming`` =
             | [] -> "All valid."
             | "Thesaurus"::_ -> "A thesaurus isn't a dinosaur!"
             | _::rest -> isValid rest
-        isValid ["Stegosaurus"; "Bambiraptor"] |> should equal __
-        isValid ["Triceratops"; "Thesaurus"; "Tyrannosaurus Rex"] |> should equal __
+        isValid ["Stegosaurus"; "Bambiraptor"] |> should equal "All valid."
+        isValid ["Triceratops"; "Thesaurus"; "Tyrannosaurus Rex"] |> should equal "A thesaurus isn't a dinosaur!"
 
     [<Test>]
     let ``25 Nesting functions`` () =
@@ -204,15 +205,15 @@ module ``08: Putting the Function into Functional Programming`` =
             let triple x = x * 3
             let addOne x = x + 1
             addOne (triple x) // see AboutCombiningFunctions.fs to see a better way of doing this
-        hailstone 5 |> should equal __
+        hailstone 5 |> should equal 16
 
     [<Test>]
     let ``26 Functions have types`` () =
         let a x y = x + y
         let b a b c d e = sprintf "%d %f %s %c %b" a b c d e
-        a |> should be ofType<FILL_ME_IN>
-        b |> should be ofType<FILL_ME_IN>
-        b 14 -8.7 |> should be ofType<FILL_ME_IN>
+        a |> should be ofType<int->int->int>
+        b |> should be ofType<int->float->string->char->bool->string>
+        b 14 -8.7 |> should be ofType<int->float->'a>
 
 
     [<Test>]
