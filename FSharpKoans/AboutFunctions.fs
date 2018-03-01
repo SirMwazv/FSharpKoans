@@ -211,9 +211,9 @@ module ``08: Putting the Function into Functional Programming`` =
      let ``26 Functions have types`` () =
         let a x y = x + y // 
         let b a b c d e = sprintf "%d %f %s %c %b" a b c d e
-        a |> should be ofType<int -> int>
-        b |> should be ofType<int->float->string->char->bool>
-        b 14 -8.7 |> should be ofType<string -> char -> bool>
+        a |> should be ofType<int ->  int-> int>
+        b |> should be ofType<int-> float-> string-> char-> bool-> string>
+        b 14 -8.7 |> should be ofType<string-> char-> bool-> string>
 
 
     [<Test>]
@@ -235,21 +235,13 @@ module ``08: Putting the Function into Functional Programming`` =
             | true -> "Pink"
             | false -> "Slink"
         let check x =
-<<<<<<< HEAD
             x % 2 <> 0 && x % 3 <> 0 && x % 5 <> 0 && x % 7 <> 0 && x % 11 <> 0
         myIf (fun x -> x%2 = 0) |> should equal "Slink"
         myIf (fun x -> x<35) |> should equal "Pink"
         myIf (fun x -> x+2 = 0) |> should equal "Slink"
         myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal "Pink"
         myIf check |> should equal "Pink"
-=======
-            (x % 2 <> 0) && (x % 3 <> 0) && (x % 5 <> 0) && (x % 7 <> 0) && (x % 11 <> 0)
-        myIf (fun x -> x%2 = 0) |> should equal __
-        myIf (fun x -> x<35) |> should equal __
-        myIf (fun x -> x+2 = 0) |> should equal __
-        myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal __
-        myIf check |> should equal __
->>>>>>> 88726e5a7a10e81deca1f2f24f6407ef464a136d
+
 
     [<Test>]
     let ``28 Type annotations for function types`` () =
