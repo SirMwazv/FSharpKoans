@@ -211,9 +211,9 @@ module ``08: Putting the Function into Functional Programming`` =
      let ``26 Functions have types`` () =
         let a x y = x + y // 
         let b a b c d e = sprintf "%d %f %s %c %b" a b c d e
-        a |> should be ofType<(int -> int -> int)>
-        b |> should be ofType<(int->float->string->char->bool->string)>
-        b 14 -8.7 |> should be ofType<(int->float->string->char->bool->string)>
+        a |> should be ofType<int ->  int-> int>
+        b |> should be ofType<int-> float-> string-> char-> bool-> string>
+        b 14 -8.7 |> should be ofType<string-> char-> bool-> string>
 
 
     [<Test>]
@@ -226,22 +226,21 @@ module ``08: Putting the Function into Functional Programming`` =
             then I'd challenge you to answer this question: why SHOULDN'T you
             be able to pass a function as a parameter?
         
-            If you can't come up with a reason, then perhaps the problem lies more
-            with your current views about how programming "should" be, and not
-            with the feature of higher-order functions :).
-        *)
+        If you can't come up with a reason, then perhaps the problem lies more
+        with your current views about how programming "should" be, and not
+        with the feature of higher-order functions :).
+    *)
             let myIf cond =
                 match cond 23 with
                 | true -> "Pink"
                 | false -> "Slink"
             let check x =
-
                 x % 2 <> 0 && x % 3 <> 0 && x % 5 <> 0 && x % 7 <> 0 && x % 11 <> 0
-            myIf (fun x -> x%2 = 0) |> should equal ("Slink")
-            myIf (fun x -> x<35) |> should equal ("Pink")
-            myIf (fun x -> x+2 = 0) |> should equal ("Slink")
-            myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal ("Pink")
-            myIf check |> should equal (false)
+            myIf (fun x -> x%2 = 0) |> should equal "Slink"
+            myIf (fun x -> x<35) |> should equal "Pink"
+            myIf (fun x -> x+2 = 0) |> should equal "Slink"
+            myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal "Pink"
+            myIf check |> should equal "Pink"
 
 
     [<Test>]
