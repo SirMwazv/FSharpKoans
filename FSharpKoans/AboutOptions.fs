@@ -52,13 +52,13 @@ module ``12: Exploring your options`` =
     let ``02 Parsing a string safely`` () =
         let parse s =
             match System.Int32.TryParse s with
-<<<<<<< HEAD
+
             |(true,xyz) -> (Some xyz) // <-- fill in the match cases
             |(false,_) -> None
-=======
+
             | (true,xyz) -> Some xyz // <-- fill in the match cases
             | (false,_) -> None
->>>>>>> 88726e5a7a10e81deca1f2f24f6407ef464a136d
+
         parse "25" |> should equal (Some 25)
         parse "48" |> should equal (Some 48)
         parse "wut" |> should equal None
@@ -67,13 +67,10 @@ module ``12: Exploring your options`` =
      let ``03 Remapping Option values`` () =
       let f n =
          match getSurname n with
-<<<<<<< HEAD
          | Some y -> y // <-- write good match cases
          | None -> "[no surname]"
-=======
          | None -> "[no surname]"
          | Some x -> x // <-- write good match cases
->>>>>>> 88726e5a7a10e81deca1f2f24f6407ef464a136d
       f "Anubis" |> should equal "[no surname]"
       f "Niccolo Machiavelli" |> should equal "Machiavelli"
       f "Mara Jade" |> should equal "Jade"

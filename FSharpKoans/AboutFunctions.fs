@@ -211,54 +211,47 @@ module ``08: Putting the Function into Functional Programming`` =
      let ``26 Functions have types`` () =
         let a x y = x + y // 
         let b a b c d e = sprintf "%d %f %s %c %b" a b c d e
-        a |> should be ofType<int -> int>
-        b |> should be ofType<int->float->string->char->bool>
-        b 14 -8.7 |> should be ofType<string -> char -> bool>
+        a |> should be ofType<(int -> int -> int)>
+        b |> should be ofType<(int->float->string->char->bool->string)>
+        b 14 -8.7 |> should be ofType<(int->float->string->char->bool->string)>
 
 
     [<Test>]
-    let ``27 Passing a function as a parameter`` () =
-    (*
-        A function which accepts a function as input is called a "higher-order"
-        function.
+        let ``27 Passing a function as a parameter`` () =
+        (*
+            A function which accepts a function as input is called a "higher-order"
+            function.
 
-        If you think that passing a function as a parameter is a bit "weird",
-        then I'd challenge you to answer this question: why SHOULDN'T you
-        be able to pass a function as a parameter?
+            If you think that passing a function as a parameter is a bit "weird",
+            then I'd challenge you to answer this question: why SHOULDN'T you
+            be able to pass a function as a parameter?
         
-        If you can't come up with a reason, then perhaps the problem lies more
-        with your current views about how programming "should" be, and not
-        with the feature of higher-order functions :).
-    *)
-        let myIf cond =
-            match cond 23 with
-            | true -> "Pink"
-            | false -> "Slink"
-        let check x =
-<<<<<<< HEAD
-            x % 2 <> 0 && x % 3 <> 0 && x % 5 <> 0 && x % 7 <> 0 && x % 11 <> 0
-        myIf (fun x -> x%2 = 0) |> should equal "Slink"
-        myIf (fun x -> x<35) |> should equal "Pink"
-        myIf (fun x -> x+2 = 0) |> should equal "Slink"
-        myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal "Pink"
-        myIf check |> should equal "Pink"
-=======
-            (x % 2 <> 0) && (x % 3 <> 0) && (x % 5 <> 0) && (x % 7 <> 0) && (x % 11 <> 0)
-        myIf (fun x -> x%2 = 0) |> should equal __
-        myIf (fun x -> x<35) |> should equal __
-        myIf (fun x -> x+2 = 0) |> should equal __
-        myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal __
-        myIf check |> should equal __
->>>>>>> 88726e5a7a10e81deca1f2f24f6407ef464a136d
+            If you can't come up with a reason, then perhaps the problem lies more
+            with your current views about how programming "should" be, and not
+            with the feature of higher-order functions :).
+        *)
+            let myIf cond =
+                match cond 23 with
+                | true -> "Pink"
+                | false -> "Slink"
+            let check x =
+
+                x % 2 <> 0 && x % 3 <> 0 && x % 5 <> 0 && x % 7 <> 0 && x % 11 <> 0
+            myIf (fun x -> x%2 = 0) |> should equal ("Slink")
+            myIf (fun x -> x<35) |> should equal ("Pink")
+            myIf (fun x -> x+2 = 0) |> should equal ("Slink")
+            myIf (fun x -> x+2 = 21 || x-2 = 21) |> should equal ("Pink")
+            myIf check |> should equal (false)
+
 
     [<Test>]
-    let ``28 Type annotations for function types`` () =
-        let a (x: string) (y:string) = x + y
-        let b (x:float) (y:float) = x + y
-        a |> should be ofType<string -> string -> string>
-        b |> should be ofType<float -> float -> float>
-        a "skip" "ping" |> should equal "skipping"
-        b 1.00 0.02 |> should equal 1.02
+            let ``28 Type annotations for function types`` () =
+                let a (x: string) (y:string) = x + y
+                let b (x:float) (y:float) = x + y
+                a |> should be ofType<string -> string -> string>
+                b |> should be ofType<float -> float -> float>
+                a "skip" "ping" |> should equal "skipping"
+                b 1.00 0.02 |> should equal 1.02
 
     [<Test>]
     let ``29 We can use a type annotation for a function's output`` () =
