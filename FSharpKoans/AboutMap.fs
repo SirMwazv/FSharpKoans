@@ -27,7 +27,8 @@ module ``15: Applying a map to a list`` =
                match xs with
                |[] -> newList
                |a::restA -> innerMap (restA) (newList@[a*2])
-            innerMap xs [] // write a function which doubles each element
+            innerMap xs []
+             // write a function which doubles each element
         map [1; 2; 3; 4] |> should equal [2; 4; 6; 8]
         map [9; 8; 7; 6] |> should equal [18; 16; 14; 12]
         map [15; 2; 7] |> should equal [30; 4; 14]
@@ -50,7 +51,8 @@ module ``15: Applying a map to a list`` =
                match xs with
                |[] -> newList
                |a::restA -> innerMap (restA) (newList@[f a])
-            innerMap xs [] // write a map which applies f to each element
+            innerMap xs []
+             // write a map which applies f to each element
         map (fun x -> x+1) [9;8;7] |> should equal [10;9;8]
         map ((*) 2) [9;8;7] |> should equal [18;16;14]
         map (fun x -> sprintf "%.2f wut?" x)  [9.3; 1.22] |> should equal ["9.30 wut?"; "1.22 wut?"]
