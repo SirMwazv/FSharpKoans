@@ -11,8 +11,8 @@ module ``15: Applying a map to a list`` =
         let map (xs : int list) : int list =
             let rec innerMap xs newList = 
                match xs with
-               |[] -> newList
-               |a::restA -> innerMap (restA) (newList@[a+1])
+               |[] -> List.rev newList
+               |a::restA -> innerMap (restA) (a+1:: newList)
             innerMap xs [] // write a function which adds 1 to each element
         map [1; 2; 3; 4] |> should equal [2; 3; 4; 5]
         map [9; 8; 7; 6] |> should equal [10; 9; 8; 7]
@@ -25,8 +25,8 @@ module ``15: Applying a map to a list`` =
         let map (xs : int list) : int list =
             let rec innerMap xs newList = 
                match xs with
-               |[] -> newList
-               |a::restA -> innerMap (restA) (newList@[a*2])
+               |[] -> List. rev newList
+               |a::restA -> innerMap (restA) (a*2:: newList)
             innerMap xs []
              // write a function which doubles each element
         map [1; 2; 3; 4] |> should equal [2; 4; 6; 8]
@@ -49,8 +49,8 @@ module ``15: Applying a map to a list`` =
         let map (f : 'a -> 'b) (xs : 'a list) : 'b list =
             let rec innerMap xs newList = 
                match xs with
-               |[] -> newList
-               |a::restA -> innerMap (restA) (newList@[f a])
+               |[] -> List.rev newList
+               |a::restA -> innerMap (restA) (f a::newList)
             innerMap xs []
              // write a map which applies f to each element
         map (fun x -> x+1) [9;8;7] |> should equal [10;9;8]

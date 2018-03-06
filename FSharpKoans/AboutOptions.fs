@@ -52,8 +52,8 @@ module ``12: Exploring your options`` =
     let ``02 Parsing a string safely`` () =
         let parse s =
             match System.Int32.TryParse s with
-            |(true,xyz) -> (Some xyz) // <-- fill in the match cases
-            |(false,_) -> None
+            |true,xyz -> Some xyz // <-- fill in the match cases
+            |false,_ -> None
 
         parse "25" |> should equal (Some 25)
         parse "48" |> should equal (Some 48)
@@ -65,6 +65,7 @@ module ``12: Exploring your options`` =
          match getSurname n with
          | Some y -> y // <-- write good match cases
          | None -> "[no surname]"
+         
       f "Anubis" |> should equal "[no surname]"
       f "Niccolo Machiavelli" |> should equal "Machiavelli"
       f "Mara Jade" |> should equal "Jade"

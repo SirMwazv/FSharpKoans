@@ -130,6 +130,8 @@ module ``07: Strings and Conversions`` =
         let ``lowercase version`` = s.ToLower()
 
         let ``without surrounding space`` = s.Trim(' ')
+        let ``without surrounding space`` = s.Trim()
+
         ``first index of 'P'`` |> should equal 5
         ``last index of 'P'`` |> should equal 11
         ``lowercase version`` |> should equal "  dr phil, phd, md, mc, medicine man  "

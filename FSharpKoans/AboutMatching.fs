@@ -22,7 +22,7 @@ module ``03: Match expressions`` =
         let result =
             match 9001 with
             | x-> // <-- use a variable pattern here!
-                match 9001 + 1000 with
+                match x + 1000 with
                 | 10001 -> "Hah! It's a palindromic number!"
                 | x -> "Some number."
             | x -> "I should have matched the other expression."
