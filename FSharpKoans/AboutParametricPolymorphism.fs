@@ -53,9 +53,9 @@ module ``11: Parametric polymorphism`` =
 
     [<Test>]
     let ``02 Defining a generic function`` () =
-        let f x y = (x, y, y)
-        f 4 5 |> should equal (4, 5, 5)
-        f "k" 'p' |> should equal ("k", 'p', 'p')
+        let f x y = (x,y,y)
+        f 4 5 |> should equal (4,5,5)
+        f "k" 'p' |> should equal ("k",'p','p')
 
     // this is how we might define a record type with two generic fields.
     type GenericRecordExample<'a,'b> = {
@@ -75,7 +75,7 @@ module ``11: Parametric polymorphism`` =
     [<Test>]
     let ``03 Creating a generic record`` () =
         // You need to edit the definition of MyRecord first!  It's just above this test.
-        let a = {MyRecord.Who = "The Doctor";MyRecord.What = 4.53;MyRecord.Where = "TTFN"}
+        let a = {Who = "The Doctor";What = 4.53;Where = "TTFN"}
         let b = {Who = 'R';What = false;Where = "tiffin"} 
         a.Who |> should equal "The Doctor"
         b.Who |> should equal 'R'
@@ -94,8 +94,8 @@ module ``11: Parametric polymorphism`` =
         let a = Secnod (6.55, 7)
         let b = Thrid (fun k -> true, k, 8)
         // how do you write a generic type?
-        a |> should be ofType<'b>
-        b |> should be ofType<'b>
+        a |> should be ofType<GenericDiscriminatedUnionExample<float,int>>
+        b |> should be ofType<GenericDiscriminatedUnionExample<'a,bool>>
 
     type MyDiscriminatedUnion<'a, 'b> =
     | Furoth of 'a 

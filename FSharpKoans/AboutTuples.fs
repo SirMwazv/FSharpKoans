@@ -24,10 +24,10 @@ module ``04: Tuples`` =
     let ``03 Decompose a tuple using tuple pattern`` () =
         let aida = 2020, "cranberry", false, "wait, what?"
         let a, b, c, d = aida
-        a |> should equal (2020)
-        b |> should equal ("cranberry")
-        c |> should equal (false)
-        d |> should equal ("wait, what?")
+        a |> should equal 2020
+        b |> should equal "cranberry"
+        c |> should equal false
+        d |> should equal "wait, what?"
 
     [<Test>]
     let ``04 Using a tuple in a match expression`` () =
@@ -37,6 +37,7 @@ module ``04: Tuples`` =
             | name, "fish" -> name + " likes seafood"
             | name, "chicken" -> name + " crows about their food"
             | name, "pasta" -> name + " loves to eat " + "pasta"
+            | _ -> "No Match Found!"
         result |> should equal "Teresa loves to eat pasta"   
    
     [<Test>]

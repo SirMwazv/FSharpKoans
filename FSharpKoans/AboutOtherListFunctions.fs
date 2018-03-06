@@ -42,7 +42,7 @@ module ``19: Other list functions`` =
                    |[] -> (listA ,listB)
                    |a::restA ->
                              match f a with 
-                             |true -> innerPartition f restA (listA@[a]) listB
+                             |true -> innerPartition f restA (a::listA) listB
                              |false -> innerPartition f restA listA (listB@[a])
               innerPartition f xs [] []
                // Does this: https://msdn.microsoft.com/en-us/library/ee353782.aspx
@@ -80,7 +80,7 @@ module ``19: Other list functions`` =
                  |[] -> None
                  |a::restA -> 
                          match p a with 
-                         |true -> (Some a)
+                         |true -> Some a
                          |false -> innerTry p restA
              innerTry p xs
              // Does this: https://msdn.microsoft.com/en-us/library/ee353506.aspx
@@ -96,7 +96,7 @@ module ``19: Other list functions`` =
                 |[] -> None
                 |a::restA ->
                           match p a with
-                          |Some x -> (Some x)
+                          |Some x -> Some x
                           |None -> innerTryPick p restA
             innerTryPick p xs
              // Does this: https://msdn.microsoft.com/en-us/library/ee353814.aspx
