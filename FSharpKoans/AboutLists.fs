@@ -35,8 +35,8 @@ module ``05: I Have Here In My Hand A List`` =
         let first = [ "grape"; "peach" ]
         let second = "pear" :: first
         let third = "apple" :: second
-        third |> should equal ("apple"::"pear"::["grape";"peach"])
-        second |> should equal ("pear"::["grape";"peach"])
+        third |> should equal ("apple"::second)
+        second |> should equal ("pear"::first)
         first |> should equal ("grape"::["peach"])
 
     [<Test>]
