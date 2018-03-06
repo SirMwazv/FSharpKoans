@@ -39,11 +39,11 @@ module ``19: Other list functions`` =
         let partition (f : 'a -> bool) (xs : 'a list) : ('a list) * ('a list) =
               let rec innerPartition f xs listA listB = 
                    match xs with 
-                   |[] -> (listA ,listB)
+                   |[] -> (List.rev listA ,List.rev listB)
                    |a::restA ->
                              match f a with 
-                             |true -> innerPartition f restA (a::listA) listB
-                             |false -> innerPartition f restA listA (listB@[a])
+                             |true -> innerPartition f restA (a:: listA) listB
+                             |false -> innerPartition f restA listA (a:: listB)
               innerPartition f xs [] []
                // Does this: https://msdn.microsoft.com/en-us/library/ee353782.aspx
         let a, b = partition (fun x -> x%2=0) [1;2;3;4;5;6;7;8;9;10]
@@ -64,8 +64,8 @@ module ``19: Other list functions`` =
            |max -> 
                 let rec innerInit max f newList =
                     match max with
-                    |[] -> newList
-                    |a::restA -> innerInit restA f (newList@[f a])
+                    |[] -> List.rev newList
+                    |a::restA -> innerInit restA f (f a ::newList)
                 innerInit max f []
              // Does this: https://msdn.microsoft.com/en-us/library/ee370497.aspx
         init 10 (fun x -> x*2) |> should equal [0;2;4;6;8;10;12;14;16;18]
@@ -80,7 +80,7 @@ module ``19: Other list functions`` =
                  |[] -> None
                  |a::restA -> 
                          match p a with 
-                         |true -> Some a
+                         |true -> (Some a)
                          |false -> innerTry p restA
              innerTry p xs
              // Does this: https://msdn.microsoft.com/en-us/library/ee353506.aspx
@@ -96,7 +96,7 @@ module ``19: Other list functions`` =
                 |[] -> None
                 |a::restA ->
                           match p a with
-                          |Some x -> Some x
+                          |Some x -> (Some x)
                           |None -> innerTryPick p restA
             innerTryPick p xs
              // Does this: https://msdn.microsoft.com/en-us/library/ee353814.aspx
