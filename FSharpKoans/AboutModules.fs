@@ -46,9 +46,9 @@ module ``22: Modules`` =
 open MushroomKingdom // <-- IMPORTANT LINE!
 
 module ``23: Opened modules`` = 
-   [<Test>]
-   let ``01 Opened modules bring their contents into scope``() =
-      // Notice tham I'm *not* saying MushroomKingdom.whatever below.
-      Mario.Name |> should equal "Mario"
-      Mario.Occupation |> should equal "Plumber"
-      Mario.Power |> should equal None
+    [<Test>]
+    let ``01 Opened modules bring their contents into scope``() =
+        // Notice tham I'm *not* saying MushroomKingdom.whatever below.
+        Mario.Name |> should equal "Mario"
+        Mario.Occupation |> should equal "Plumber"
+        Mario.Power |> should equal None

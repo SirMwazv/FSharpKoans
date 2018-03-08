@@ -121,10 +121,11 @@ module ``21: Sequences and Arrays`` =
             }
         let rec puffery x =
             seq {
+                yield x
                 match String.length x with
                 | 0 -> None
-                | 1 -> yield x
-                | _ -> yield! puffery x.[..String.length x - 1] 
+                | 1 -> None
+                | _ -> yield! puffery x.[..String.length x - 2] 
             }
             // you've seen the 'puffery' function in the previous test, yes?
             // Implement that here, using a sequence expression.
